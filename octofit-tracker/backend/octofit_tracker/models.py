@@ -1,11 +1,13 @@
 from djongo import models
 
+
 class Team(models.Model):
     name = models.CharField(max_length=100, unique=True)
     class Meta:
         db_table = 'teams'
     def __str__(self):
         return self.name
+
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -15,6 +17,7 @@ class User(models.Model):
         db_table = 'users'
     def __str__(self):
         return self.name
+
 
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activities')
@@ -26,6 +29,7 @@ class Activity(models.Model):
     def __str__(self):
         return f"{self.user.name} - {self.type}"
 
+
 class Workout(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -34,6 +38,7 @@ class Workout(models.Model):
         db_table = 'workouts'
     def __str__(self):
         return self.name
+
 
 class Leaderboard(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='leaderboards')
